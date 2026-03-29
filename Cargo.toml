@@ -1,0 +1,12 @@
+[package]
+name = "hashcaust"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+blake2 = "0.10.6"
+clap = { version = "4.6.0", features = ["cargo"] }
+hex = "0.4.3"
+md5 = "0.8.0"
+sha1 = "0.11.0"
+sha2 = "0.11.0"
