@@ -1,8 +1,7 @@
-use sha2::{Sha256, Digest};
 use hex;
+use sha2::{Digest, Sha256};
 
-pub fn crack_sha256(hash:&str,word:&str) -> Option<String> {
-
+pub fn crack_sha256(hash: &str, word: &str) -> Option<String> {
     let mut hasher = Sha256::new();
     hasher.update(word);
     let digest = hasher.finalize();
