@@ -1,4 +1,5 @@
 use clap::{command, Arg};
+use colored::*;
 
 mod attack;
 mod hash;
@@ -6,8 +7,22 @@ mod hash;
 use attack::*;
 use hash::*;
 
+const BANNER: &str = r#"
+__________________________________
+    __  __           __      
+   / / / /___ ______/ /_     
+  / /_/ / __ `/ ___/ __ \    
+ / __  / /_/ (__  ) / / /    
+/_/_/_/\__,_/____/_/ /_/  __ 
+  / ____/___ ___  _______/ /_
+ / /   / __ `/ / / / ___/ __/
+/ /___/ /_/ / /_/ (__  ) /_  
+\____/\__,_/\__,_/____/\__/
+__________________________________"#;
+
 fn main() {
     let match_cli = command!()
+        .before_help(BANNER.bright_green().bold().to_string())
         .arg_required_else_help(true)
         .arg(Arg::new("hash").help("Target hash").required(true))
         .arg(
@@ -34,6 +49,8 @@ fn main() {
                 .required(true),
         )
         .get_matches();
+
+    println!("{}\n", BANNER.bright_green().bold().to_string());
 
     let hash = match_cli.get_one::<String>("hash").unwrap();
     let wordlst = match_cli.get_one::<String>("wordlist").unwrap();
