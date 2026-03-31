@@ -1,8 +1,8 @@
-use blake2::{Blake2b512, Digest};
+use blake2::{Blake2s256, Digest};
 use hex;
 
-pub fn crack_blake2(hash: &str, word: &str) -> Option<String> {
-    let mut hasher = Blake2b512::new();
+pub fn crack_blake2s(hash: &str, word: &str) -> Option<String> {
+    let mut hasher = Blake2s256::new();
     hasher.update(word.as_bytes());
     let digest = hasher.finalize();
     let hex_digest = hex::encode(digest);
