@@ -71,6 +71,7 @@ fn main() {
             "md4" => wordlist(crack_md4, wordlst.as_str(), hash.as_str()),
             "md5" => wordlist(crack_md5, wordlst.as_str(), hash.as_str()),
             "sha1" => wordlist(crack_sha1, wordlst.as_str(), hash.as_str()),
+            "sha224" => wordlist(crack_sha224, wordlst.as_str(), hash.as_str()),
             "sha256" => wordlist(crack_sha256, wordlst.as_str(), hash.as_str()),
             "sha384" => wordlist(crack_sha384, wordlst.as_str(), hash.as_str()),
             "sha512" => wordlist(crack_sha512, wordlst.as_str(), hash.as_str()),
