@@ -1,5 +1,5 @@
-use md4::{Md4, Digest};
 use hex;
+use md4::{Digest, Md4};
 
 pub fn crack_md4(hash: &str, word: &str) -> Option<String> {
     let mut hasher = Md4::new();
