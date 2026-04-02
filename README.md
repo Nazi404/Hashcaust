@@ -169,13 +169,37 @@ hashcaust <hash> -t md5 -m brute -i ?l?l?d?d
 
 ## 📦 Supported Hash Types
 
-```
-argon2, bcrypt,
-blake2b, blake2s, blake3,
-md4, md5, ntlm,
-sha1, sha224, sha256, sha384, sha512,
-sha3_224, sha3_256, sha3_384, sha3_512
-```
+### 🔓 Fast Hashes (Direct Compare)
+
+- **MD Family**
+  - md4
+  - md5
+  - ntlm (MD4-based)
+
+- **SHA Family**
+  - sha1
+  - sha224
+  - sha256
+  - sha384
+  - sha512
+
+- **SHA-3 Family**
+  - sha3_224
+  - sha3_256
+  - sha3_384
+  - sha3_512
+
+- **BLAKE Family**
+  - blake2b
+  - blake2s
+  - blake3
+
+---
+
+### 🐢 Slow Hashes (Salted / Verify Required)
+
+- argon2
+- bcrypt
 
 ---
 
