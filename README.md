@@ -156,17 +156,6 @@ src/
 
 ---
 
-## 🔥 Roadmap / Future Improvements
-
-- ⚡ Multi-threading (Rayon)
-- 📊 Real-time progress bar
-- 🧠 Automatic hash detection
-- 🚀 Performance optimization
-- 💻 Pre-built binaries (release builds)
-- 🎯 Hashcat-style modes (`-m 0`, `-m 1000`)
-
----
-
 ## ⚠️ Disclaimer
 
 This tool is intended for:
@@ -180,7 +169,7 @@ This tool is intended for:
 
 ## 👨‍💻 Author
 
-- GitHub: https://github.com/Anon-404
+- GitHub: https://github.com/Nazi404
 
 ---
 
