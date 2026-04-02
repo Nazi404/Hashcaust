@@ -1,116 +1,138 @@
 # 🔐 HashCaust
 
-«⚡ A fast, modular hash cracking tool written in Rust 🦀
-Inspired by hashcat (CPU-based)»
+> ⚡ A fast, modular hash cracking tool written in **Rust** 🦀  
+> Inspired by **hashcat** (CPU-based, no GPU support)
 
 ---
 
-🚀 Features
+## 🚀 Features
 
-- 🔓 Multiple hash algorithm support
-- ⚡ Wordlist attack mode
-- 💥 Brute-force (mask-based) attack mode
-- 🧠 Modular hash system
-- 🎨 Colored CLI output
-- 🖥️ Clean CLI interface (Clap आधारित)
+- 🔓 Supports multiple hash algorithms  
+- ⚡ Wordlist-based attack mode  
+- 💥 Mask-based brute-force attack  
+- 🧠 Modular and extensible architecture  
+- 🎨 Colored CLI output  
+- 🖥️ Clean and flexible CLI (powered by Clap)
 
 ---
 
-📦 Supported Hash Types
+## 📦 Supported Hash Types
 
+```
 argon2, bcrypt,
 blake2b, blake2s, blake3,
 md4, md5, ntlm,
 sha1, sha224, sha256, sha384, sha512,
 sha3_224, sha3_256, sha3_384, sha3_512
+```
 
 ---
 
-⚙️ Installation
+## ⚙️ Installation
 
-1️⃣ Clone repo
+### 1️⃣ Clone the Repository
 
+```bash
 git clone https://github.com/Anon-404/hashcaust.git
 cd hashcaust
+```
 
-2️⃣ Build
+### 2️⃣ Build the Project
 
+```bash
 cargo build --release
+```
 
 ---
 
-▶️ Usage
+## ▶️ Usage
 
+```bash
 cargo run -- <hash> -t <type> -m <mode> [options]
+```
 
 ---
 
-🧠 Modes
+## 🧠 Attack Modes
 
-📂 Wordlist Mode
+### 📂 Wordlist Mode
 
+```bash
 cargo run -- <hash> -t <type> -m wordlist -w <wordlist>
+```
 
-✅ Example:
+#### ✅ Example
 
+```bash
 cargo run -- 5e884898da28047151d0e56f8dc6292773603d0d \
 -t sha1 \
 -m wordlist \
 -w rockyou.txt
+```
 
 ---
 
-💥 Brute-force Mode (Mask Attack)
+### 💥 Brute-force Mode (Mask Attack)
 
+```bash
 cargo run -- <hash> -t <type> -m brute -i <mask>
+```
 
-✅ Example:
+#### ✅ Example
 
+```bash
 cargo run -- <hash> -t md5 -m brute -i ?l?l?d?d
+```
 
 ---
 
-🎯 Mask Syntax
+## 🎯 Mask Syntax
 
-Pattern| Meaning| Example
-"?l"| lowercase letters| a-z
-"?u"| uppercase letters| A-Z
-"?d"| digits| 0-9
-"?s"| symbols| !@#$...
-"?a"| all printable| full ASCII
+| Pattern | Description          | Characters        |
+|--------|---------------------|------------------|
+| `?l`   | Lowercase letters   | a-z              |
+| `?u`   | Uppercase letters   | A-Z              |
+| `?d`   | Digits              | 0-9              |
+| `?s`   | Symbols             | !@#$%^&*...      |
+| `?a`   | All printable ASCII | Full range       |
 
-Example:
+#### Example Mask
 
+```
 ?l?l?d?d
+```
 
 👉 Generates:
-
+```
 aa00 → zz99
+```
 
 ---
 
-🧠 How It Works
+## 🧠 How It Works
 
-🔓 Wordlist Mode
+### 🔓 Wordlist Mode
 
-1. Reads wordlist line-by-line
-2. Applies selected hash function
-3. Compares or verifies
-4. Stops on match ✅
-
----
-
-💥 Brute-force Mode
-
-1. Parses mask ("?l?d?d" etc.)
-2. Generates all combinations recursively
-3. Tests each candidate
-4. Prints match when found
+1. Loads target hash  
+2. Reads wordlist line-by-line  
+3. Applies selected hash function  
+4. Compares or verifies result  
+5. Stops when match is found ✅  
 
 ---
 
-📁 Project Structure
+### 💥 Brute-force Mode
 
+1. Parses mask (`?l?d?d` etc.)  
+2. Generates all combinations recursively  
+3. Tests each candidate  
+4. Prints match when found  
+
+---
+
+## 📁 Project Structure
+
+```
 src/
  ├── main.rs
  ├── attack/
@@ -122,44 +144,52 @@ src/
  │    ├── bcrypt.rs
  │    ├── argon2.rs
  │    └── ...
+```
 
 ---
 
-⚠️ Important Notes
+## ⚠️ Important Notes
 
-- ⚡ Fast hashes → direct compare (MD5, SHA, NTLM)
-- 🐢 Slow hashes → verify (bcrypt, Argon2)
-- 💀 Brute-force grows exponentially → use wisely
+- ⚡ Fast hashes → direct comparison (MD5, SHA, NTLM)  
+- 🐢 Slow hashes → require verification (bcrypt, Argon2)  
+- 💀 Brute-force grows exponentially → use wisely  
 
 ---
 
-🔥 Future Improvements
+## 🔥 Roadmap / Future Improvements
 
 - ⚡ Multi-threading (Rayon)
-- 📊 Progress bar
-- 🧠 Auto hash detection
+- 📊 Real-time progress bar
+- 🧠 Automatic hash detection
 - 🚀 Performance optimization
-- 💻 Pre-built binary release
+- 💻 Pre-built binaries (release builds)
+- 🎯 Hashcat-style modes (`-m 0`, `-m 1000`)
 
 ---
 
-⚠️ Disclaimer
+## ⚠️ Disclaimer
 
-This tool is made for:
+This tool is intended for:
 
-- 📚 Educational purposes
-- 🔐 Security research
+- 📚 Educational purposes  
+- 🔐 Security research  
 
-❌ Do NOT use for illegal activities
+❌ Do **NOT** use this tool for illegal activities.
 
 ---
 
-👨‍💻 Author
+## 👨‍💻 Author
 
 - GitHub: https://github.com/Anon-404
 
 ---
 
-⭐ Support
+## ⭐ Support
 
-If you like this project, give it a ⭐ on GitHub!
+If you like this project, consider giving it a ⭐ on GitHub!
+
+---
+
+## 💬 Final Note
+
+> "Fast hashes fall quickly. Slow hashes test your patience." 😏
