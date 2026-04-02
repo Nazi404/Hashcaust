@@ -226,15 +226,6 @@ Do NOT use for illegal activities ❌
 
 This project is licensed under the **GNU General Public License v3.0 (GPL-3.0)** – see the [LICENSE](LICENSE) file for details.
 
----
-
-### 🔹 Summary
-
-- ✅ Free to use, modify, and distribute  
-- ✅ Copyleft: derivative works must also be GPL-3.0 licensed  
-- ✅ No warranty or liability  
-- ✅ Must include original copyright and license notice
-
 --
 
 ## ⭐ Support
