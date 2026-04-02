@@ -1,7 +1,6 @@
 # 🔐 HashCaust
 
-> ⚡ A fast, modular hash cracking tool written in **Rust** 🦀  
-> Inspired by **hashcat** (CPU-based, no GPU support)
+> ⚡ A fast, modular hash cracking tool written in **Rust** 🦀
 
 ---
 
