@@ -194,8 +194,6 @@ hashcaust <hash> -t md5 -m brute -i ?l?l?d?d
   - blake2s
   - blake3
 
----
-
 ### 🐢 Slow Hashes (Salted / Verify Required)
 
 - argon2
@@ -223,6 +221,21 @@ Do NOT use for illegal activities ❌
 - https://github.com/Nazi404
 
 ---
+
+## 📜 License
+
+This project is licensed under the **GNU General Public License v3.0 (GPL-3.0)** – see the [LICENSE](LICENSE) file for details.
+
+---
+
+### 🔹 Summary
+
+- ✅ Free to use, modify, and distribute  
+- ✅ Copyleft: derivative works must also be GPL-3.0 licensed  
+- ✅ No warranty or liability  
+- ✅ Must include original copyright and license notice
+
+--
 
 ## ⭐ Support
 
