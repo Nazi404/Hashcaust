@@ -77,17 +77,20 @@ fn main() {
     } else if mode == "brute" {
         let i = increment.expect("Mask is required for brute mode");
         println!("mask: {}", i);
-    } else {}
+    }
 
     match mode {
         "wordlist" => {
             let wordlst = wordlst.expect("Wordlist is required for wordlist mode");
             match type_hash.as_str() {
+                "argon2" => wordlist(crack_argon2, wordlst.as_str(), hash.as_str()),
+                "bcrypt" => wordlist(crack_bcrypt, wordlst.as_str(), hash.as_str()),
                 "blake2b" => wordlist(crack_blake2b, wordlst.as_str(), hash.as_str()),
                 "blake2s" => wordlist(crack_blake2s, wordlst.as_str(), hash.as_str()),
                 "blake3" => wordlist(crack_blake3, wordlst.as_str(), hash.as_str()),
                 "md4" => wordlist(crack_md4, wordlst.as_str(), hash.as_str()),
                 "md5" => wordlist(crack_md5, wordlst.as_str(), hash.as_str()),
+                "ntlm" => wordlist(crack_ntlm, wordlst.as_str(), hash.as_str()),
                 "sha1" => wordlist(crack_sha1, wordlst.as_str(), hash.as_str()),
                 "sha224" => wordlist(crack_sha224, wordlst.as_str(), hash.as_str()),
                 "sha256" => wordlist(crack_sha256, wordlst.as_str(), hash.as_str()),
@@ -107,11 +110,14 @@ fn main() {
         "brute" => {
             let increment = increment.expect("Mask is required for brute mode");
             match type_hash.as_str() {
+                "argon2" => brute_mask(crack_argon2, increment.as_str(), hash.as_str()),
+                "bcrypt" => brute_mask(crack_bcrypt, increment.as_str(), hash.as_str()),
                 "blake2b" => brute_mask(crack_blake2b, increment.as_str(), hash.as_str()),
                 "blake2s" => brute_mask(crack_blake2s, increment.as_str(), hash.as_str()),
                 "blake3" => brute_mask(crack_blake3, increment.as_str(), hash.as_str()),
                 "md4" => brute_mask(crack_md4, increment.as_str(), hash.as_str()),
                 "md5" => brute_mask(crack_md5, increment.as_str(), hash.as_str()),
+                "ntlm" => brute_mask(crack_ntlm, increment.as_str(), hash.as_str()),
                 "sha1" => brute_mask(crack_sha1, increment.as_str(), hash.as_str()),
                 "sha224" => brute_mask(crack_sha224, increment.as_str(), hash.as_str()),
                 "sha256" => brute_mask(crack_sha256, increment.as_str(), hash.as_str()),

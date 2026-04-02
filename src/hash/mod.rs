@@ -1,8 +1,11 @@
+mod argon2;
+mod bcrypt;
 mod blake2b;
 mod blake2s;
 mod blake3;
 mod md4;
 mod md5;
+mod ntlm;
 mod sha1;
 mod sha224;
 mod sha256;
@@ -13,11 +16,14 @@ mod sha3_384;
 mod sha3_512;
 mod sha512;
 
+pub use argon2::*;
+pub use bcrypt::*;
 pub use blake2b::*;
 pub use blake2s::*;
 pub use blake3::*;
 pub use md4::*;
 pub use md5::*;
+pub use ntlm::*;
 pub use sha1::*;
 pub use sha224::*;
 pub use sha256::*;
