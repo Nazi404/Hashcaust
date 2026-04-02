@@ -12,7 +12,158 @@
 - 💥 Mask-based brute-force attack  
 - 🧠 Modular and extensible architecture  
 - 🎨 Colored CLI output  
-- 🖥️ Clean and flexible CLI (powered by Clap)
+- 🖥️ Clean CLI (Clap powered)
+
+---
+
+## ⚙️ Installation
+
+### 1️⃣ Install Rust
+
+If Rust is not installed:
+
+```bash
+curl https://sh.rustup.rs -sSf | sh
+```
+
+Reload shell:
+
+```bash
+source $HOME/.cargo/env
+```
+
+Verify installation:
+
+```bash
+rustc --version
+cargo --version
+```
+
+---
+
+### 2️⃣ Clone Repository
+
+```bash
+git clone https://github.com/Nazi404/Hashcaust.git
+cd Hashcaust
+```
+
+---
+
+### 3️⃣ Build Project
+
+```bash
+cargo build --release
+```
+
+👉 Binary location:
+
+```bash
+target/release/hashcaust
+```
+
+---
+
+## ▶️ Usage
+
+---
+
+### 🔹 Run with Cargo (Development)
+
+```bash
+cargo run -- <hash> -t <type> -m <mode> [options]
+```
+
+---
+
+### 🔹 Run with Binary
+
+```bash
+./target/release/hashcaust <hash> -t <type> -m <mode> [options]
+```
+
+---
+
+## 🌍 Global Installation (Run from Anywhere)
+
+### ✅ Option 1: Install to system PATH (recommended)
+
+```bash
+cp target/release/hashcaust /usr/local/bin/hashcaust
+```
+
+Now you can run:
+
+```bash
+hashcaust <hash> -t <type> -m <mode>
+```
+
+---
+
+### ✅ Option 2: Install in user directory (no root)
+
+```bash
+mkdir -p ~/.local/bin
+cp target/release/hashcaust ~/.local/bin/
+```
+
+Add to PATH:
+
+```bash
+echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
+Now run globally:
+
+```bash
+hashcaust <hash> -t <type> -m <mode>
+```
+
+---
+
+## 🧠 Attack Modes
+
+### 📂 Wordlist Mode
+
+```bash
+hashcaust <hash> -t <type> -m wordlist -w <wordlist>
+```
+
+#### Example:
+
+```bash
+hashcaust 5e884898da28047151d0e56f8dc6292773603d0d \
+-t sha1 \
+-m wordlist \
+-w rockyou.txt
+```
+
+---
+
+### 💥 Brute-force Mode (Mask Attack)
+
+```bash
+hashcaust <hash> -t <type> -m brute -i <mask>
+```
+
+#### Example:
+
+```bash
+hashcaust <hash> -t md5 -m brute -i ?l?l?d?d
+```
+
+---
+
+## 🎯 Mask Syntax
+
+| Pattern | Description          | Characters        |
+|--------|---------------------|------------------|
+| `?l`   | Lowercase letters   | a-z              |
+| `?u`   | Uppercase letters   | A-Z              |
+| `?d`   | Digits              | 0-9              |
+| `?s`   | Symbols             | !@#$%^&*...      |
+| `?a`   | All printable ASCII | Full range       |
 
 ---
 
@@ -28,157 +179,27 @@ sha3_224, sha3_256, sha3_384, sha3_512
 
 ---
 
-## ⚙️ Installation
-
-### 1️⃣ Clone the Repository
-
-```bash
-git clone https://github.com/Anon-404/hashcaust.git
-cd hashcaust
-```
-
-### 2️⃣ Build the Project
-
-```bash
-cargo build --release
-```
-
----
-
-## ▶️ Usage
-
-```bash
-cargo run -- <hash> -t <type> -m <mode> [options]
-```
-
----
-
-## 🧠 Attack Modes
-
-### 📂 Wordlist Mode
-
-```bash
-cargo run -- <hash> -t <type> -m wordlist -w <wordlist>
-```
-
-#### ✅ Example
-
-```bash
-cargo run -- 5e884898da28047151d0e56f8dc6292773603d0d \
--t sha1 \
--m wordlist \
--w rockyou.txt
-```
-
----
-
-### 💥 Brute-force Mode (Mask Attack)
-
-```bash
-cargo run -- <hash> -t <type> -m brute -i <mask>
-```
-
-#### ✅ Example
-
-```bash
-cargo run -- <hash> -t md5 -m brute -i ?l?l?d?d
-```
-
----
-
-## 🎯 Mask Syntax
-
-| Pattern | Description          | Characters        |
-|--------|---------------------|------------------|
-| `?l`   | Lowercase letters   | a-z              |
-| `?u`   | Uppercase letters   | A-Z              |
-| `?d`   | Digits              | 0-9              |
-| `?s`   | Symbols             | !@#$%^&*...      |
-| `?a`   | All printable ASCII | Full range       |
-
-#### Example Mask
-
-```
-?l?l?d?d
-```
-
-👉 Generates:
-```
-aa00 → zz99
-```
-
----
-
-## 🧠 How It Works
-
-### 🔓 Wordlist Mode
-
-1. Loads target hash  
-2. Reads wordlist line-by-line  
-3. Applies selected hash function  
-4. Compares or verifies result  
-5. Stops when match is found ✅  
-
----
-
-### 💥 Brute-force Mode
-
-1. Parses mask (`?l?d?d` etc.)  
-2. Generates all combinations recursively  
-3. Tests each candidate  
-4. Prints match when found  
-
----
-
-## 📁 Project Structure
-
-```
-src/
- ├── main.rs
- ├── attack/
- │    ├── brute.rs
- │    └── wordlist.rs
- ├── hash/
- │    ├── md5.rs
- │    ├── ntlm.rs
- │    ├── bcrypt.rs
- │    ├── argon2.rs
- │    └── ...
-```
-
----
-
 ## ⚠️ Important Notes
 
-- ⚡ Fast hashes → direct comparison (MD5, SHA, NTLM)  
-- 🐢 Slow hashes → require verification (bcrypt, Argon2)  
-- 💀 Brute-force grows exponentially → use wisely  
+- ⚡ Fast hashes → direct compare  
+- 🐢 Slow hashes → require verification  
+- 💀 Brute-force grows exponentially  
 
 ---
 
 ## ⚠️ Disclaimer
 
-This tool is intended for:
-
-- 📚 Educational purposes  
-- 🔐 Security research  
-
-❌ Do **NOT** use this tool for illegal activities.
+For educational & security research only.  
+Do NOT use for illegal activities ❌
 
 ---
 
 ## 👨‍💻 Author
 
-- GitHub: https://github.com/Nazi404
+- https://github.com/Nazi404
 
 ---
 
 ## ⭐ Support
 
-If you like this project, consider giving it a ⭐ on GitHub!
-
----
-
-## 💬 Final Note
-
-> "Fast hashes fall quickly. Slow hashes test your patience." 😏
+If you like this project, give it a ⭐ on GitHub!
