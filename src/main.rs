@@ -57,6 +57,13 @@ fn main() {
                 .help("Attack mode")
                 .required(true),
         )
+        .arg(
+            Arg::new("rule")
+            .short('r')
+            .long("rule")
+            .value_name("RULE")
+            .help("Rule to use"),
+        )
         .get_matches();
 
     println!("{}\n", BANNER.bright_green().bold().to_string());
@@ -66,6 +73,7 @@ fn main() {
     let increment = match_cli.get_one::<String>("increment");
     let type_hash = match_cli.get_one::<String>("type").unwrap();
     let mode = match_cli.get_one::<String>("mode").unwrap().as_str();
+    let rule = match_cli.get_one::<String>("rule");
 
     println!("Hash: {}", hash);
     println!("Type: {}", type_hash);
@@ -83,23 +91,23 @@ fn main() {
         "wordlist" => {
             let wordlst = wordlst.expect("Wordlist is required for wordlist mode");
             match type_hash.as_str() {
-                "argon2" => wordlist(crack_argon2, wordlst.as_str(), hash.as_str()),
-                "bcrypt" => wordlist(crack_bcrypt, wordlst.as_str(), hash.as_str()),
-                "blake2b" => wordlist(crack_blake2b, wordlst.as_str(), hash.as_str()),
-                "blake2s" => wordlist(crack_blake2s, wordlst.as_str(), hash.as_str()),
+                "argon2" => wordlist(crack_argon2, wordlst.as_str(), hash.as_str(),rule),
+                "bcrypt" => wordlist(crack_bcrypt, wordlst.as_str(), hash.as_str(),rule),
+                "blake2b" => wordlist(crack_blake2b, wordlst.as_str(), hash.as_str(),rule),
+                "blake2s" => wordlist(crack_blake2s, wordlst.as_str(), hash.as_str(),rule),
                 "blake3" => wordlist(crack_blake3, wordlst.as_str(), hash.as_str()),
-                "md4" => wordlist(crack_md4, wordlst.as_str(), hash.as_str()),
-                "md5" => wordlist(crack_md5, wordlst.as_str(), hash.as_str()),
-                "ntlm" => wordlist(crack_ntlm, wordlst.as_str(), hash.as_str()),
-                "sha1" => wordlist(crack_sha1, wordlst.as_str(), hash.as_str()),
-                "sha224" => wordlist(crack_sha224, wordlst.as_str(), hash.as_str()),
-                "sha256" => wordlist(crack_sha256, wordlst.as_str(), hash.as_str()),
-                "sha384" => wordlist(crack_sha384, wordlst.as_str(), hash.as_str()),
+                "md4" => wordlist(crack_md4, wordlst.as_str(), hash.as_str(),rule),
+                "md5" => wordlist(crack_md5, wordlst.as_str(), hash.as_str(),rule),
+                "ntlm" => wordlist(crack_ntlm, wordlst.as_str(), hash.as_str(),rule),
+                "sha1" => wordlist(crack_sha1, wordlst.as_str(), hash.as_str(),rule),
+                "sha224" => wordlist(crack_sha224, wordlst.as_str(), hash.as_str(),rule),
+                "sha256" => wordlist(crack_sha256, wordlst.as_str(), hash.as_str(),rule),
+                "sha384" => wordlist(crack_sha384, wordlst.as_str(), hash.as_str(),rule),
                 "sha512" => wordlist(crack_sha512, wordlst.as_str(), hash.as_str()),
-                "sha3_224" => wordlist(crack_sha3_224, wordlst.as_str(), hash.as_str()),
-                "sha3_256" => wordlist(crack_sha3_256, wordlst.as_str(), hash.as_str()),
-                "sha3_384" => wordlist(crack_sha3_384, wordlst.as_str(), hash.as_str()),
-                "sha3_512" => wordlist(crack_sha3_512, wordlst.as_str(), hash.as_str()),
+                "sha3_224" => wordlist(crack_sha3_224, wordlst.as_str(), hash.as_str(),rule),
+                "sha3_256" => wordlist(crack_sha3_256, wordlst.as_str(), hash.as_str(),rule),
+                "sha3_384" => wordlist(crack_sha3_384, wordlst.as_str(), hash.as_str(),rule),
+                "sha3_512" => wordlist(crack_sha3_512, wordlst.as_str(), hash.as_str(),rule),
 
                 _ => {
                     eprintln!("Hash type not supported or invalid type");
