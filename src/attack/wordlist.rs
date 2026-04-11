@@ -17,7 +17,6 @@ pub fn wordlist(
     let mut rulefunc:Option<mlua::Function> = None;
     if let Some(rule) = rule {
 
-        // lua = Lua::new();
         let code = read_to_string("src/rules/rules.lua").unwrap();
         lua.load(&code).exec().unwrap();
         let globals = lua.globals();
