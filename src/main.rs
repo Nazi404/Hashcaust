@@ -87,6 +87,10 @@ fn main() {
         println!("mask: {}", i);
     }
 
+    if rule != None {
+        println!("rule: {}", rule.unwrap());
+    }
+
     match mode {
         "wordlist" => {
             let wordlst = wordlst.expect("Wordlist is required for wordlist mode");

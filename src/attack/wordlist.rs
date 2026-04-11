@@ -8,6 +8,8 @@ pub fn wordlist(
     hash: &str,
     rule: Option<&String>,
 ) {
+
+    let mut found:bool = false;
     let file = File::open(path).expect("Unable to open file");
     let reader = BufReader::new(file);
 
@@ -33,8 +35,13 @@ pub fn wordlist(
 
             if let Some(result) = f(hash, &line) {
                 println!("[+] {}: {}", hash, result);
+                found = true;
                 break;
             }
         }
+    }
+
+    if !found {
+        println!("[-] No match for this hash");
     }
 }
