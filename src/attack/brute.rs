@@ -1,7 +1,23 @@
-pub fn brute_mask(f: fn(&str, &str) -> Option<String>, mask: &str, hash: &str) {
-    let charsets = parse_mask(mask);
+use mlua::{Function, Lua};
+use std::fs::read_to_string;
 
-    generate(String::new(), &charsets, 0, hash, f);
+pub fn brute_mask(
+    f: fn(&str, &str) -> Option<String>,
+    mask: &str,
+    hash: &str,
+    rule: Option<&String>,
+) {
+    let charsets = parse_mask(mask);
+    let lua = Lua::new();
+    let mut rulefunc: Option<Function> = None;
+
+    if let Some(rule) = rule {
+        let code = read_to_string("src/rules/rules.lua").expect("Failed to read rules.lua");
+        lua.load(&code).exec().expect("Lua load failed");
+        let globals = lua.globals();
+        rulefunc = Some(globals.get(rule.as_str()).expect("Unknown rule name"));
+    }
+    generate(String::new(), &charsets, 0, hash, f, &rulefunc);
 }
 
 fn generate(
@@ -10,11 +26,21 @@ fn generate(
     pos: usize,
     hash: &str,
     f: fn(&str, &str) -> Option<String>,
+    rulefunc: &Option<Function>,
 ) {
     if pos == charsets.len() {
-        if let Some(result) = f(hash, &prefix) {
+        let mut candidate = prefix;
+        if let Some(func) = rulefunc {
+            match func.call::<String>(candidate.clone()) {
+                Ok(result) => candidate = result,
+                Err(_) => return,
+            }
+        }
+
+        if let Some(result) = f(hash, &candidate) {
             println!("[+] {}: {}", hash, result);
         }
+
         return;
     }
 
@@ -22,7 +48,7 @@ fn generate(
         let mut new_prefix = prefix.clone();
         new_prefix.push(c);
 
-        generate(new_prefix, charsets, pos + 1, hash, f);
+        generate(new_prefix, charsets, pos + 1, hash, f, rulefunc);
     }
 }
 
@@ -44,10 +70,8 @@ fn parse_mask(mask: &str) -> Vec<Vec<char>> {
                 charsets.push(set);
             }
         } else {
-            // literal char
             charsets.push(vec![c]);
         }
     }
-
     charsets
 }
